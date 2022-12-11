@@ -1,5 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import CouponContainer from './CouponContainer';
+import Crousel from "./Crousel";
+import OfferContainer from './OfferContainer';
 
 function Home() {
     const Container = styled.div`
@@ -8,7 +11,11 @@ function Home() {
     min-height:676px;
     `;
   return (
-    <Container></Container>
+    <Container>
+      <Crousel />
+      <CouponContainer />
+      <OfferContainer />
+    </Container>
   )
 }
 
