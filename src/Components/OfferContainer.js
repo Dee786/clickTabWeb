@@ -10,7 +10,7 @@ const Container = styled.div`
 `;
 
 const ContainerC = styled.img`
- ${window.innerWidth>400 ? 'width:30%;' : 'width:260px;'}
+ ${window.innerWidth>400 ? 'width:30%;' : 'width:88%;'}
  height:270px;
  background-color:#F2F2F2;
  margin:20px;
