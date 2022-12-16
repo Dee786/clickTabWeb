@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Login from './Login';
 import { isLogin } from '../utils/isLogin';
+import { useHistory } from 'react-router';
 
 const pages = isLogin() ? ["Account","Analytics","Report","Payment"] : ["Register"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -21,6 +22,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const history = useHistory();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -38,7 +40,7 @@ function ResponsiveAppBar() {
   };
 
   const onSumitSetting = (e) =>{
-    window.location.replace(`/${e}`);
+    history.push(`/${e}`);
   }
 
   return (
