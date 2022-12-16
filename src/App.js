@@ -25,7 +25,7 @@ export default function App() {
       <div className="App">
       <Router>
         <Navbar />
-        <div style={{minHeight:"650px"}}>
+        <div style={{minHeight:"650px",width:"100%",backgroundColor:"#F2F2F2"}}>
         <Switch>
           <Route path="/" exact>
             <Home />

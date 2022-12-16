@@ -38,9 +38,7 @@ function ResponsiveAppBar() {
   };
 
   const onSumitSetting = (e) =>{
-    if(e === 'Logout'){
-      window.location.replace('/logout');
-    }
+    window.location.replace(`/${e}`);
   }
 
   return (
@@ -99,7 +97,7 @@ function ResponsiveAppBar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+                  <Typography textAlign="center" onClick={()=>{onSumitSetting(page)}}>{page}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -127,7 +125,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={()=>{onSumitSetting(page)}}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
