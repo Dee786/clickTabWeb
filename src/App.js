@@ -1,10 +1,18 @@
 import Home from "./Components/Home";
 import Navbar from "./Components/Navbar";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
 import Aboutus from "./Components/Aboutus";
 import Nopage from "./Components/Nopage";
 import styled from 'styled-components'
+import Dashboard from "./Components/Dashboard";
+import Logout from "./Components/Logout";
+import PrivateRoute from "./Routes/PrivateRoute";
+import PublicRoute from "./Routes/PublicRoute";
 
 const Container = styled.footer`
  min-height:30px;
@@ -14,16 +22,23 @@ const Container = styled.footer`
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="home" element={<Home />} />
-        <Route path="aboutus" element={<Aboutus />} />
-        <Route path="*" element={<Nopage />} />
-      </Routes>
+      <div className="App">
+      <Router>
+        <Navbar />
+        <div style={{minHeight:"650px"}}>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <PublicRoute path="/about" component={Aboutus}  />
+          <PublicRoute path="/logout" component={Logout}  />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PublicRoute path="*" component={Nopage} />
+        </Switch>
+        </div>
+      </Router>
       <Container>©Copyright - 2022</Container>
-    </BrowserRouter>
+      </div>
   );
 }
 

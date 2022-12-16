@@ -4,8 +4,8 @@ import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import { encryptStorage } from '../utils/encryptStorage';
 
 export default function Login({}) {
   const [open, setOpen] = React.useState(false);
@@ -22,7 +22,19 @@ export default function Login({}) {
 
   const handleSubmit = () => {
     console.log(email,password)
-    setOpen(false);
+    if(email && password){
+      if(email === 'deepank@gmail.com' && password === 'deepank@gmail.com'){
+        encryptStorage.setItem('user_clicktabweb',{email,password});
+        setOpen(false);
+        window.location.replace('/dashboard');
+      }
+      else{
+        alert('incorect email and password');
+      }
+    }
+    else{
+      alert("wrong input")
+    }
   };
 
   return (

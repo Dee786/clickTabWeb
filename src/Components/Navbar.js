@@ -13,8 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Login from './Login';
+import { isLogin } from '../utils/isLogin';
 
-const pages = ["Register"];
+const pages = isLogin() ? ["Account","Analytics","Report","Payment"] : ["Register"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -35,6 +36,12 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const onSumitSetting = (e) =>{
+    if(e === 'Logout'){
+      window.location.replace('/logout');
+    }
+  }
 
   return (
     <AppBar position="static" style={{backgroundColor:"#d8c0f0",color:"#752e47"}}>
@@ -58,8 +65,9 @@ function ResponsiveAppBar() {
           >
             ClickTabWeb
           </Typography>
-            <Login />
-
+            {
+              !isLogin() && <Login />
+            }
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -127,7 +135,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
+          {isLogin() && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
@@ -151,11 +159,11 @@ function ResponsiveAppBar() {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Typography textAlign="center" onClick={(e)=>onSumitSetting(setting)}>{setting}</Typography>
                 </MenuItem>
               ))}
             </Menu>
-          </Box>
+          </Box>}
         </Toolbar>
       </Container>
     </AppBar>
