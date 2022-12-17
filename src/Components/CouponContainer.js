@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Coupons from './Coupons';
 
 const Container = styled.div`
  min-height:300px;
@@ -10,13 +11,6 @@ const Container = styled.div`
  overflow-x: auto;
 `;
 
-const ContainerC = styled.img`
-${window.innerWidth>400 ? 'width:30%;' : 'width:77%;'}
- height:270px;
- background-color:#F2F2F2;
- margin:20px;
-`;
-
 const items = ["a","b","c","a","b","c"];
 
 function CouponContainer() {
@@ -24,7 +18,7 @@ function CouponContainer() {
     <Container >
         {
             items.map(item=>{
-                return(<ContainerC item={item} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvblhwixyjNjflJnoyKx_JxMNBZa0Tqj1pQ&usqp=CAU"/>)
+                return(<Coupons width={window.innerWidth>400 ? "320px" : "222px"} />)
             })
         }
     </Container>
