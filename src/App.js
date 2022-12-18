@@ -13,6 +13,7 @@ import Dashboard from "./Components/Dashboard";
 import Logout from "./Components/Logout";
 import PrivateRoute from "./Routes/PrivateRoute";
 import PublicRoute from "./Routes/PublicRoute";
+import Report from "./Components/Report";
 
 const Container = styled.footer`
  min-height:30px;
@@ -33,6 +34,7 @@ export default function App() {
           <PublicRoute path="/about" component={Aboutus}  />
           <PublicRoute path="/logout" component={Logout}  />
           <PrivateRoute path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/report" component={Report} />
           <PublicRoute path="*" component={Nopage} />
         </Switch>
         </div>

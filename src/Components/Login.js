@@ -20,10 +20,12 @@ export default function Login({}) {
     setOpen(false);
   };
 
+  const emails = ["deepank123@gmail.com","shubham@gmail.com"]
+
   const handleSubmit = () => {
     console.log(email,password)
     if(email && password){
-      if(email === 'deepank@gmail.com' && password === 'deepank@gmail.com'){
+      if(emails.includes(email) && password === 'test123test'){
         encryptStorage.setItem('user_clicktabweb',{email,password});
         setOpen(false);
         window.location.replace('/dashboard');
