@@ -19,7 +19,7 @@ const Report = () => {
     }, [])
     
   return (
-    <div style={{marginLeft:"25%",paddingTop:"20px"}}>
+    <div style={{marginLeft:window.innerWidth>400 ? "25%":"20%",paddingTop:"20px"}}>
         <ReportContainer>
             <h3>Approved Conversations: {report.approvedConversions}</h3>
             <h3>Campaign id: {report.campaign_id}</h3>
