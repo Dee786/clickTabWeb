@@ -25,7 +25,7 @@ export default function Coupons({width}) {
         image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvblhwixyjNjflJnoyKx_JxMNBZa0Tqj1pQ&usqp=CAU"
         alt="green iguana"
       />
-      <CardContent sx={{overflow: "auto",maxHeight: "56px"}}>
+      <CardContent sx={{overflowY: "auto",maxHeight: "56px",marginRight:"-50px",paddingRight:"50px"}}>
         <Typography gutterBottom variant="h5" component="div">
           Lizard
         </Typography>

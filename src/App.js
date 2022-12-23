@@ -17,7 +17,7 @@ import Report from "./Components/Report";
 
 const Container = styled.footer`
  min-height:30px;
- background-color:#a5db8a;
+ background-color:darkgray;
  text-align:center;
 `;
 

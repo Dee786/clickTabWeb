@@ -47,24 +47,7 @@ function ResponsiveAppBar() {
     <AppBar position="static" style={{backgroundColor:"#d8c0f0",color:"#752e47"}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            ClickTabWeb
-          </Typography>
+          { window.innerWidth > 400 && <img onClick={()=>{history.push(`/`);}} src="../Images/clicktabweblogormbg.png" alt='logoimage' style={{width:"126px",marginLeft:"-37px",cursor:"pointer"}} />}
             {
               !isLogin() && <Login />
             }
@@ -104,7 +87,6 @@ function ResponsiveAppBar() {
               ))}
             </Menu>
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
             noWrap
@@ -138,7 +120,7 @@ function ResponsiveAppBar() {
           {isLogin() && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="Remy Sharp" src="../Images/usericon1.png" />
               </IconButton>
             </Tooltip>
             <Menu
