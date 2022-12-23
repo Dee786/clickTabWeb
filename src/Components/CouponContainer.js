@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 import Coupons from './Coupons';
 
@@ -14,11 +15,13 @@ const Container = styled.div`
 const items = ["a","b","c","a","b","c"];
 
 function CouponContainer() {
+  const items = useSelector((state) => state.authReducer.coupons)
+  console.log(items)
   return (
     <Container >
         {
             items.map(item=>{
-                return(<Coupons width={window.innerWidth>400 ? "320px" : "222px"} />)
+                return(<Coupons item={item} width={window.innerWidth>400 ? "320px" : "222px"} />)
             })
         }
     </Container>
