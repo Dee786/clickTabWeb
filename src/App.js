@@ -14,6 +14,9 @@ import Logout from "./Components/Logout";
 import PrivateRoute from "./Routes/PrivateRoute";
 import PublicRoute from "./Routes/PublicRoute";
 import Report from "./Components/Report";
+import Profile from "./Components/Profile";
+import AccountDetails from "./Components/AccountDetails";
+import Analytics from "./Components/Analytics";
 
 const Container = styled.footer`
  min-height:30px;
@@ -35,6 +38,9 @@ export default function App() {
           <PublicRoute path="/logout" component={Logout}  />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/report" component={Report} />
+          <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/account" component={AccountDetails} />
+          <PrivateRoute path="/analytics" component={Analytics} />
           <PublicRoute path="*" component={Nopage} />
         </Switch>
         </div>
