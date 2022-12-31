@@ -64,7 +64,7 @@ function ResponsiveAppBar() {
     if(e === 'Logout'){
       await doUserLogOut();
       encryptStorage.removeItem('user_clicktabweb');
-      window.location.replace("/");
+      window.location.reload("");
       return;
     }
     history.push(`/${e}`);
