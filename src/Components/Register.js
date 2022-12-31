@@ -7,45 +7,39 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { encryptStorage } from '../utils/encryptStorage';
 import Slide from '@mui/material/Slide';
+import { useState } from 'react';
 import Parse from 'parse/dist/parse.min.js';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Login({}) {
-  const [open, setOpen] = React.useState(false);
-  const [email, setemail] = React.useState("");
-  const [password, setpassword] = React.useState("");
-  //console.log(Parse.User.current().get('username'))
 
-  const doUserLogIn = async function () {
-    // Note that these values come from state variables that we've declared before
-    const usernameValue = email;
-    const passwordValue = password;
-    try {
-      const loggedInUser = await Parse.User.logIn(usernameValue, passwordValue);
-      // logIn returns the corresponding ParseUser object
-      alert(
-        `Success! User ${loggedInUser.get(
-          'username'
-        )} has successfully signed in!`
-      );
-      // To verify that this is in fact the current user, `current` can be used
-      const currentUser = await Parse.User.current();
-      console.log(loggedInUser === currentUser);
-      // Clear input fields
-      setemail('');
-      setpassword('');
-      encryptStorage.setItem('user_clicktabweb',{email,password});
-      setOpen(false);
-      window.location.replace('/dashboard');
-      // Update state variable holding current user
-    } catch (error) {
-      // Error can be caused by wrong parameters or lack of Internet connection
-      alert(`Error! ${error.message}`);
-    }
-  };
+  // Functions used by the screen components
+  export default function Register({}) {
+    const [open, setOpen] = React.useState(false);
+    const [email, setemail] = React.useState("");
+    const [password, setpassword] = React.useState("");
+    
+    const doUserRegistration = async function () {
+      // Note that these values come from state variables that we've declared before
+      const usernameValue = email;
+      const passwordValue = password;
+
+      try {
+        // Since the signUp method returns a Promise, we need to call it using await
+        const createdUser = await Parse.User.signUp(usernameValue, passwordValue);
+        alert(
+          `Success! User ${createdUser.getUsername()} was successfully created!`
+        );
+        encryptStorage.setItem('user_clicktabweb',{email,password});
+        setOpen(false);
+        window.location.replace('/dashboard');
+      } catch (error) {
+        // signUp can fail if any parameter is blank or failed an uniqueness check on the server
+        alert(`Error! ${error}`);
+      }
+    };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -77,10 +71,10 @@ export default function Login({}) {
   return (
     <div>
       <Button style={{color:"white"}} onClick={handleClickOpen}>
-        Login
+        Register
       </Button>
       <Dialog open={open} onClose={handleClose} Transition={Transition} TransitionComponent={Transition}>
-        <DialogTitle>Login</DialogTitle>
+        <DialogTitle>Register</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -104,7 +98,7 @@ export default function Login({}) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={doUserLogIn}>Login</Button>
+          <Button onClick={doUserRegistration}>Register</Button>
         </DialogActions>
       </Dialog>
     </div>

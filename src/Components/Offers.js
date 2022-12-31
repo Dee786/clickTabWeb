@@ -15,19 +15,19 @@ const ContainerC = styled.div`
 `;
 
 
-export default function Coupons({width}) {
+export default function Coupons({offer,width}) {
   return (
     <ContainerC>
     <Card sx={{width:width,height: "100%" }}>
       <CardMedia
         component="img"
         height="140"
-        image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKvblhwixyjNjflJnoyKx_JxMNBZa0Tqj1pQ&usqp=CAU"
+        image={offer.image}
         alt="green iguana"
       />
       <CardContent sx={{overflowY: "auto",maxHeight: "56px",marginRight:"-50px",paddingRight:"50px"}}>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {offer.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
           Lizards are a widespread group of squamate reptiles, with over 6,000
@@ -37,7 +37,7 @@ export default function Coupons({width}) {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">About More</Button>
+        <Button size="small" onClick={()=>{window.location.replace(offer.link)}}>About More</Button>
       </CardActions>
     </Card>
     </ContainerC>

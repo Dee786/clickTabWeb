@@ -1,7 +1,7 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 import Coupons from './Coupons';
+import Parse from 'parse/dist/parse.min.js';
 
 const Container = styled.div`
  min-height:300px;
@@ -15,13 +15,32 @@ const Container = styled.div`
 const items = ["a","b","c","a","b","c"];
 
 function CouponContainer() {
-  const items = useSelector((state) => state.authReducer.coupons)
-  console.log(items)
+  const [readResults, setReadResults] = React.useState(null);
+  const readTodos = async function () {
+    // Reading parse objects is done by using Parse.Query
+    const parseQuery = new Parse.Query('coupons');
+    try {
+      let todos = await parseQuery.find();
+      // Be aware that empty or invalid queries return as an empty array
+      // Set results to state variable
+      console.log(todos);
+      setReadResults(todos);
+      return true;
+    } catch (error) {
+      // Error can be caused by lack of Internet connection
+      alert(`Error! ${error.message}`);
+      return false;
+    }
+  };
+  if(readResults === null){
+    readTodos();
+  }
+  //console.log(items)
   return (
     <Container >
         {
-            items.map(item=>{
-                return(<Coupons item={item} width={window.innerWidth>400 ? "320px" : "222px"} />)
+            readResults?.map(item=>{
+                return(<Coupons item={item.attributes} width={window.innerWidth>400 ? "320px" : "222px"} />)
             })
         }
     </Container>

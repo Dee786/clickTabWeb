@@ -16,13 +16,14 @@ const ContainerC = styled.div`
 
 
 export default function Coupons({item,width}) {
+  //console.log(item)
   return (
     <ContainerC>
     <Card sx={{width: width,height: "100%" }}>
       <CardMedia
         component="img"
         height="140"
-        image={item.img}
+        image={item.image}
         alt="green iguana"
       />
       <CardContent sx={{overflowY: "auto",maxHeight: "56px",marginRight:"-50px",paddingRight:"50px"}}>
@@ -38,7 +39,7 @@ export default function Coupons({item,width}) {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={()=>{window.location.replace(item.link)}}>Share</Button>
-        <Button size="small" style={{backgroundColor:"grey",color:"white"}}>{item.couponCode}</Button>
+        <Button size="small" style={{backgroundColor:"grey",color:"white"}}>{item.code}</Button>
       </CardActions>
     </Card>
     </ContainerC>

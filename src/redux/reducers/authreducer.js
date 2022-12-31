@@ -1,7 +1,11 @@
+import { initializeParse } from "../../config/parse";
 import { isLogin } from "../../utils/isLogin";
 import  * as types from "../actions/authActions";
+import Parse from 'parse/dist/parse.min.js';
+
+initializeParse();
 const initialState = {
-    isauthenticated: isLogin(),
+    isauthenticated: Parse.User.current() !== null,
     user:{
         
     },

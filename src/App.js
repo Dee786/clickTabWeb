@@ -17,6 +17,10 @@ import Report from "./Components/Report";
 import Profile from "./Components/Profile";
 import AccountDetails from "./Components/AccountDetails";
 import Analytics from "./Components/Analytics";
+import { initializeParse } from "./config/parse";
+import { LoginGoogle } from "./Components/LoginGoogle";
+import { UserRegistration } from "./Components/RegisterGoogle";
+import { UserPasswordReset } from "./Components/ResetPassword";
 
 const Container = styled.footer`
  min-height:30px;
@@ -25,6 +29,7 @@ const Container = styled.footer`
 `;
 
 export default function App() {
+  initializeParse();
   return (
       <div className="App">
       <Router>
@@ -35,6 +40,9 @@ export default function App() {
             <Home />
           </Route>
           <PublicRoute path="/about" component={Aboutus}  />
+          <PublicRoute path="/login" component={LoginGoogle}  />
+          <PublicRoute path="/passwordreset" component={UserPasswordReset}  />
+          <PublicRoute path="/register" component={UserRegistration}  />
           <PublicRoute path="/logout" component={Logout}  />
           <PrivateRoute path="/dashboard" component={Dashboard} />
           <PrivateRoute path="/report" component={Report} />

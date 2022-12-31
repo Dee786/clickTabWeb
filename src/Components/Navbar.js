@@ -11,12 +11,16 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import Login from './Login';
 import { isLogin } from '../utils/isLogin';
 import { useHistory } from 'react-router';
+import Register from './Register';
+import Parse from 'parse/dist/parse.min.js';
+import { encryptStorage } from '../utils/encryptStorage';
+import { getCurrentUser, initializeParse } from '../config/parse';
 
-const pages = isLogin() ? ["Account","Analytics","Report","Payment"] : ["Register"];
+initializeParse();
+const pages = Parse.User.current() !== null ? ["Account","Analytics","Report","Payment"] : ["Login","Register","About"];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
@@ -39,7 +43,30 @@ function ResponsiveAppBar() {
     setAnchorElUser(null);
   };
 
-  const onSumitSetting = (e) =>{
+  const doUserLogOut = async function () {
+    try {
+      await Parse.User.logOut();
+      // To verify that current user is now empty, currentAsync can be used
+      const currentUser = await Parse.User.current();
+      if (currentUser === null) {
+        alert('Success! No user is logged in anymore!');
+      }
+      // Update state variable holding current user
+      getCurrentUser();
+      return true;
+    } catch (error) {
+      alert(`Error! ${error.message}`);
+      return false;
+    }
+  };
+
+  const onSumitSetting = async(e) =>{
+    if(e === 'Logout'){
+      await doUserLogOut();
+      encryptStorage.removeItem('user_clicktabweb');
+      window.location.replace("/");
+      return;
+    }
     history.push(`/${e}`);
   }
 
@@ -48,9 +75,6 @@ function ResponsiveAppBar() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           { window.innerWidth > 400 && <img onClick={()=>{history.push(`/`);}} src="../Images/clicktabweblogormbg.png" alt='logoimage' style={{width:"126px",marginLeft:"-37px",cursor:"pointer"}} />}
-            {
-              !isLogin() && <Login />
-            }
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -117,7 +141,7 @@ function ResponsiveAppBar() {
             ))}
           </Box>
 
-          {isLogin() && <Box sx={{ flexGrow: 0 }}>
+          {Parse.User.current() !== null && <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="../Images/usericon1.png" />
